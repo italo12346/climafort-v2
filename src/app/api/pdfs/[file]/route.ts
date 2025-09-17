@@ -8,11 +8,11 @@ interface Params {
   file: string;
 }
 
-export async function GET(req: Request, { params }: { params: Params }) {
+export async function GET(req: Request, context: { params: Params }) {
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.redirect("/login");
 
-  const { file } = params;
+  const { file } = context.params;
   const filePath = path.join(process.cwd(), "private_pdfs", file);
 
   if (!fs.existsSync(filePath)) {
