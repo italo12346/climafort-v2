@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route"; // ajusta o path
+import { authOptions } from "../auth/[...nextauth]/auth"; // ajusta o path
 
 const prisma = new PrismaClient();
 

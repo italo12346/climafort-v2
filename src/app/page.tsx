@@ -1,7 +1,7 @@
 // /src/app/page.tsx
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "./api/auth/[...nextauth]/auth";
 import PdfGallery from "./components/PdfGallery";
 
 export default async function HomePage() {
