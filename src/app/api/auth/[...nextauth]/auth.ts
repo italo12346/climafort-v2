@@ -1,4 +1,4 @@
-import NextAuth, { AuthOptions, User } from "next-auth";
+import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
@@ -13,24 +13,25 @@ export const authOptions: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Senha", type: "password" },
       },
-      async authorize(credentials): Promise<User | null> {
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        // Busca usuário no banco
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
         if (!user) return null;
 
-        // Compara senha usando bcrypt
         const isValid = await bcrypt.compare(
           credentials.password,
           user.password
         );
         if (!isValid) return null;
 
-        // Retorna usuário com id e email
-        return { id: user.id.toString(), name: null, email: user.email };
+        return {
+          id: user.id.toString(),
+          email: user.email,
+          role: user.role,
+        };
       },
     }),
   ],
@@ -40,4 +41,19 @@ export const authOptions: AuthOptions = {
   },
 
   secret: process.env.NEXTAUTH_SECRET,
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role; // tipado agora
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+      return session;
+    },
+  },
 };

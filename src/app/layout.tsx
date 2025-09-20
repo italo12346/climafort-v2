@@ -1,9 +1,13 @@
-import "./globals.css";
 import { Poppins } from "next/font/google";
+import "./globals.css";
+import { Providers } from "./providers";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
-export const metadata = { title: "Climafort", description: "Galeria de PDFs" };
+export const metadata = {
+  title: "Climafort",
+  description: "Galeria de PDFs",
+};
 
 export default function RootLayout({
   children,
@@ -12,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={poppins.className}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
