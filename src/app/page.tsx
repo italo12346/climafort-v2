@@ -15,6 +15,7 @@ export default async function HomePage() {
     { title: "BLOCOS 2", file: "BLOCOS_2.pdf", cover: "/Designer.png" },
     { title: "BLOCOS 4", file: "BLOCOS_4.pdf", cover: "/Designer.png" },
     { title: "BLOCOS 5", file: "BLOCOS_5.pdf", cover: "/Designer.png" },
+    { title: "CHALES", file: "CHALES.pdf", cover: "/Designer.png" },
   ];
 
   // Passa para o componente Client
