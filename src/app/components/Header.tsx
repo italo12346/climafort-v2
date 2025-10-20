@@ -13,9 +13,12 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center mb-10 px-6 py-4 bg-gradient-to-r from-[#2b5a80] to-[#4479a1] shadow-lg text-white">
-      <h1 className="text-3xl font-extrabold tracking-tight drop-shadow-md">
+      <Link
+        href="/"
+        className="text-3xl font-extrabold tracking-tight drop-shadow-md hover:opacity-90 transition-opacity"
+      >
         BLOCOS VILA GALÉ
-      </h1>
+      </Link>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-4">
